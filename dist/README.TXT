@@ -1,0 +1,1 @@
+Poner en la misma carpeta del "lol.launcher.exe" y abrirlo. 
