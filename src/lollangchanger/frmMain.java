@@ -70,22 +70,20 @@ public class frmMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblIdioma)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEspanol)
-                                    .addComponent(btnCambiar)
-                                    .addComponent(btnIngles))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addComponent(lblIdioma)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEspanol)
+                            .addComponent(btnCambiar)
+                            .addComponent(btnIngles))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -99,10 +97,10 @@ public class frmMain extends javax.swing.JFrame {
                 .addComponent(btnEspanol)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCambiar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addContainerGap())
         );
 
@@ -115,22 +113,25 @@ public class frmMain extends javax.swing.JFrame {
        BufferedReader buffer;
       
         
-     
+       
         try {
+            //Abre archivo de configuracion
             archivoLocale=new File(".\\RADS\\system\\locale.cfg");
-            lector=new FileReader(archivoLocale);
+            //Lo lee
+           lector=new FileReader(archivoLocale);
            buffer=new BufferedReader(lector);
            String linea=buffer.readLine();
            
-            
+            //Busca la linea a editar y se fija en que idioma se encuentra
            if(btnIngles.isSelected()){
                 linea="locale = en_US";
-           }else if(btnEspanol.isSelected()){
-               linea="locale = es_MX";
+            }else if(btnEspanol.isSelected()){
+                 linea="locale = es_MX";
            }
-       FileWriter  fichero = new FileWriter(".\\RADS\\system\\locale.cfg");
-        PrintWriter pw = new PrintWriter(fichero,true);
-           pw.println(linea);
+           //escribe el nuevo idioma seleccionado al archivo cfg.
+            FileWriter  fichero = new FileWriter(".\\RADS\\system\\locale.cfg");
+            PrintWriter pwChanger = new PrintWriter(fichero,true);
+            pwChanger.println(linea);
            JOptionPane.showMessageDialog(this, "Idioma cambiado.");
         } catch (IOException ex) {
            JOptionPane.showMessageDialog(this, ex);
