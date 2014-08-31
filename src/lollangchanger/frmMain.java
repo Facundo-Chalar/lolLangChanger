@@ -126,7 +126,7 @@ public class frmMain extends javax.swing.JFrame {
            if(btnIngles.isSelected()){
                 linea="locale = en_US";
             }else if(btnEspanol.isSelected()){
-                 linea="locale = es_MX";
+                linea="locale = es_MX";
            }
            //escribe el nuevo idioma seleccionado al archivo cfg.
             FileWriter  fichero = new FileWriter(".\\RADS\\system\\locale.cfg");
